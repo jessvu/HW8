@@ -36,20 +36,20 @@ except:
 def get_tweets():
 ##YOUR CODE HERE
     if 'umsi' in CACHE_DICTION: #if it is...
-        print('using cached data')
-        twitter_results = CACHE_DICTION['umsi'] #grab the data from the cache
+        print('Data in the cache')
+        results = CACHE_DICTION['umsi'] #grab the data from the cache
     else:
-        print('getting data from internet') 
-        twitter_results = api.user_timeline('umsi') #get it from the internet
+        print('Fetching') 
+        results = api.user_timeline('umsi') #get it from the internet
         #but also, save in the dictionary to cache it
-        CACHE_DICTION['umsi'] = twitter_results #add it to the dictionary, new key-val pair
+        CACHE_DICTION['umsi'] = results #add it to the dictionary, new key-val pair
         #and then write the whole cache dictionary, not with new info added, to the file
         #so it'll be there even after you retrieve new data
         f = open(CACHE_FNAME, 'w') #open the cache file for writing
         f.write(json.dumps(CACHE_DICTION)) #make the whole dictionary holding data and unique 
         #identifiers into json format
         f.close()
-    return twitter_results #return lists, turns out
+    return results #return lists, turns out
 ## [PART 2]
 # Create a database: tweets.sqlite,
 # And then load all of those tweets you got from Twitter into a database table called Tweets, with the following columns in each row:
